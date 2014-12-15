@@ -11,14 +11,12 @@
 using namespace std;
 
 
-
 template <class Type>
 myVector<Type>::myVector() : p(new Type[5]), sz(5)
 {
 	tracker = 0;
 	this->initialize();
 }
-
 
 
 template <class Type>
@@ -29,13 +27,11 @@ myVector<Type>::myVector(int s) : p(new Type[s]), sz(s)
 }
 
 
-
 template <class Type>
 myVector<Type>::~myVector()
 {
 	delete[] p;
 }
-
 
 
 template <class Type>
@@ -47,9 +43,7 @@ void myVector<Type>::pushBack(Type x)
 
 	p[tracker] = x;
 	tracker++;
-
 }
-
 
 
 template <class Type>
@@ -78,7 +72,6 @@ void  myVector<Type>::enlarge(int inc)
 }
 
 
-
 template <class Type>
 void myVector<Type>::insert(int pos, Type elem)
 {
@@ -92,14 +85,12 @@ void myVector<Type>::insert(int pos, Type elem)
 }
 
 
-
 template <class Type>
 void myVector<Type>::initialize()
 {
 	for (int i=0; i < sz; i++)
 		p[i] = 0;
 }
-
 
 
 template <class Type>
@@ -112,7 +103,6 @@ Type myVector<Type>::get(int pos) const
 }
 
 
-
 template <class Type>
 void myVector<Type>::show() const
 {
@@ -123,14 +113,12 @@ void myVector<Type>::show() const
 }
 
 
-
 template <class Type>
 myVector<Type>::myVector(const myVector& param) : sz(param.sz), p(new Type[param.sz]), tracker(param.tracker)
 {
 	for (int i=0; i < sz; i++)
 		p[i] = param.p[i];
 }
-
 
 
 template <class Type>
@@ -151,4 +139,3 @@ myVector<Type>& myVector<Type>::operator= (const myVector& param)
 
 	return *this;
 }
-
