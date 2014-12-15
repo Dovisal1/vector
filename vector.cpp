@@ -53,12 +53,11 @@ void  myVector<Type>::enlarge(unsigned int inc)
 	Type * temp = new Type[sz + inc];
 
 	//setting the new array the values of the old
-	for(int i=0; i < sz; i++) {
+	for(unsigned int i=0; i < sz; i++)
 		temp[i] = p[i];
-	}
 
 	//initializing all the extra slots to zero
-	for(int i=sz; i < sz + inc; i++)
+	for(unsigned int i = sz; i < sz + inc; i++)
 		temp[i] = 0;
 
 	//deleting the old array
@@ -78,6 +77,8 @@ void myVector<Type>::insert(unsigned int pos, Type elem)
 	if ( pos >= sz )
 		//we want to enlarge to vector to be able to
 		//inlcude that position
+		//Adding 1 is necessary because size is
+		//actually one greater than the last position
 		this->enlarge(pos - sz + 1); 
 	
 	//inserting the value into the slot
@@ -88,7 +89,7 @@ void myVector<Type>::insert(unsigned int pos, Type elem)
 template <class Type>
 void myVector<Type>::initialize()
 {
-	for (int i=0; i < sz; i++)
+	for (unsigned int i=0; i < sz; i++)
 		p[i] = 0;
 }
 
@@ -104,9 +105,9 @@ Type myVector<Type>::get(unsigned int pos) const
 
 
 template <class Type>
-void myVector<Type>::show() const
+void myVector<Type>::print() const
 {
-	for (int i = 0; i < this->size(); i++)
+	for (unsigned int i = 0; i < this->size(); i++)
 		cout << this->get(i) << " ";
 
 	cout << endl;
@@ -116,7 +117,7 @@ void myVector<Type>::show() const
 template <class Type>
 myVector<Type>::myVector(const myVector& param) : sz(param.sz), p(new Type[param.sz]), tracker(param.tracker)
 {
-	for (int i=0; i < sz; i++)
+	for (unsigned int i=0; i < sz; i++)
 		p[i] = param.p[i];
 }
 
@@ -134,7 +135,7 @@ myVector<Type>& myVector<Type>::operator= (const myVector& param)
 	p = new Type[sz];
 
 	//setting new array to the values of param
-	for (int i=0; i < sz; i++)
+	for (unsigned int i=0; i < sz; i++)
 		p[i] = param.p[i];
 
 	return *this;

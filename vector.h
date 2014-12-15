@@ -28,9 +28,9 @@ public:
 	void insert (unsigned int, Type);
 
 	//read methods
-	int size() const { return sz; }
+	unsigned int size() const { return sz; }
 	Type get(unsigned int) const;
-	void show() const;
+	void print() const;
 
 	//copy constructor
 	myVector(const myVector&);
