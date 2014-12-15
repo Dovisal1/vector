@@ -20,7 +20,7 @@ myVector<Type>::myVector() : p(new Type[5]), sz(5)
 
 
 template <class Type>
-myVector<Type>::myVector(int s) : p(new Type[s]), sz(s)
+myVector<Type>::myVector(unsigned int s) : p(new Type[s]), sz(s)
 {
 	tracker = 0;
 	this->initialize();
@@ -47,7 +47,7 @@ void myVector<Type>::pushBack(Type x)
 
 
 template <class Type>
-void  myVector<Type>::enlarge(int inc)
+void  myVector<Type>::enlarge(unsigned int inc)
 {
 	//creating a new array that is larger than the original
 	Type * temp = new Type[sz + inc];
@@ -73,7 +73,7 @@ void  myVector<Type>::enlarge(int inc)
 
 
 template <class Type>
-void myVector<Type>::insert(int pos, Type elem)
+void myVector<Type>::insert(unsigned int pos, Type elem)
 {
 	if ( pos >= sz )
 		//we want to enlarge to vector to be able to
@@ -94,7 +94,7 @@ void myVector<Type>::initialize()
 
 
 template <class Type>
-Type myVector<Type>::get(int pos) const
+Type myVector<Type>::get(unsigned int pos) const
 {
 	if (pos >= sz)
 		return 0;

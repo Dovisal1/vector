@@ -10,26 +10,26 @@ template <class Type>
 class myVector
 {
 	Type * p;
-	int sz;
-	int tracker;
+	unsigned int sz;
+	unsigned int tracker;
 	void initialize();
-	void enlarge(int);
+	void enlarge(unsigned int);
 
 public:
 	//constructors
 	myVector();
-	myVector(int);
+	myVector(unsigned int);
 
 	//destructor
 	~myVector();
 
 	//write methods
 	void pushBack(Type);
-	void insert (int, Type);
+	void insert (unsigned int, Type);
 
 	//read methods
 	int size() const { return sz; }
-	Type get(int) const;
+	Type get(unsigned int) const;
 	void show() const;
 
 	//copy constructor
