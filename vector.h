@@ -12,8 +12,16 @@ class myVector
 	Type * p;
 	unsigned int sz;
 	unsigned int tracker;
+
+	//Sets all elements to zero
 	void initialize();
+
+	//enlarges vector by its param
 	void enlarge(unsigned int);
+
+	//makes sure vector is not too small
+	//enlarges it as necessary
+	void checkSize(unsigned int);
 
 public:
 	//constructors
@@ -37,5 +45,9 @@ public:
 
 	//copy assignment 
 	myVector& operator= (const myVector&);
+
+	//redefining the offset operator
+	//return a reference so that we can alter value
+	Type& operator[] (unsigned int);
 	
 };

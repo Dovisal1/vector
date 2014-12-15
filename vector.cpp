@@ -70,17 +70,23 @@ void  myVector<Type>::enlarge(unsigned int inc)
 	sz += inc;
 }
 
+template <class Type>
+void myVector<Type>::checkSize(unsigned int pos)
+{
+	//we want to enlarge to vector to be able to
+	//inlcude that position
+	//Adding 1 is necessary because size is
+	//actually one greater than the last position index
+	if ( pos >= sz )
+		this->enlarge(pos - sz + 1);
+}
+
 
 template <class Type>
 void myVector<Type>::insert(unsigned int pos, Type elem)
 {
-	if ( pos >= sz )
-		//we want to enlarge to vector to be able to
-		//inlcude that position
-		//Adding 1 is necessary because size is
-		//actually one greater than the last position
-		this->enlarge(pos - sz + 1); 
-	
+	this->checkSize(pos);
+
 	//inserting the value into the slot
 	p[pos] = elem;
 }
@@ -97,10 +103,8 @@ void myVector<Type>::initialize()
 template <class Type>
 Type myVector<Type>::get(unsigned int pos) const
 {
-	if (pos >= sz)
-		return 0;
-	else
-		return p[pos];
+	this->checkSize(pos);
+	return p[pos];
 }
 
 
@@ -139,4 +143,11 @@ myVector<Type>& myVector<Type>::operator= (const myVector& param)
 		p[i] = param.p[i];
 
 	return *this;
+}
+
+template <class Type>
+Type& myVector<Type>::operator[] (unsigned int pos)
+{
+	this->checkSize(pos);
+	return p[pos];
 }
