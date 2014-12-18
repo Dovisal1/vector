@@ -1,5 +1,5 @@
 #include <initializer_list>
- using namespace std;
+using namespace std;
 
 template <class Type>
 class myVector
