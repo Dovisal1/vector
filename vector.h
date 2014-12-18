@@ -37,7 +37,7 @@ private:
         //creating a new array with the new size
         Type * temp = new Type[sz+inc];
 
-        //setting the new array the values of the old
+        //setting the new array the to values of the old
         for(unsigned int i=0; i < sz; i++)
             temp[i] = p[i]; 
 
