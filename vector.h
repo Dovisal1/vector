@@ -1,5 +1,13 @@
 #include <initializer_list>
-using namespace std;
+#include <cctype>
+
+/*
+ *
+ *  A primitive vector-like container.
+ *  Hopefully it will become more refined.
+ *
+ */
+
 
 template <class Type>
 class myVector
@@ -121,10 +129,10 @@ public:
 
 
 
-    myVector(initializer_list<Type> seq) : p(new Type[seq.size()] ), sz( seq.size() )
+    myVector(std::initializer_list<Type> seq) : p(new Type[seq.size()] ), sz( seq.size() )
     {
         //Copying the elements of the initializer list into the vector
-        copy(seq.begin(), seq.end(), p);
+        std::copy(seq.begin(), seq.end(), p);
     }
 
 
@@ -311,6 +319,18 @@ public:
     }
 
 
+    Type& front()
+    {
+        return *p;
+    }
+
+
+    Type& back()
+    {
+        return p[ sz-1 ];
+    }
+
+
     //status methods:
 
     //checks if the array has size
@@ -348,8 +368,6 @@ public:
     
     //read methods:
 
-    unsigned int end() const { return sz; }
-
     unsigned int size() const { return sz; }
 
     unsigned int begin() const { return 0; }
@@ -358,7 +376,7 @@ public:
     //This can cause undefined behavior if range error
     //This shouldn't happen because the vector knows its size
     //The programmer must use good practice
-    Type get(unsigned int pos) const { return p[pos]; }
+    Type at(unsigned int pos) const { return p[pos]; }
 
 
 
@@ -396,7 +414,7 @@ public:
 
     //copy assignment to initializer list:
 
-    myVector& operator= (initializer_list<Type> seq)
+    myVector& operator= (std::initializer_list<Type> seq)
     {
         //takes the lists size
         sz = seq.size();
@@ -406,7 +424,7 @@ public:
         p = new Type[sz];
 
         //copies the lists contents to the array
-        copy(seq.begin(), seq.end(), p);
+        std::copy(seq.begin(), seq.end(), p);
 
         //returning value by reference
         //so that we can chain assignments
@@ -440,5 +458,74 @@ public:
 
     const Type* data() const {return p; } 
 
-    
+    Type* end() { return p+sz; }
+
+    const Type* end() const { return p+sz; }
+
 };
+
+//String template specializations
+
+template<>
+void myVector<std::string>::initialize()
+{
+    for (unsigned int i=0; i < sz; i++)
+        p[i] = "";   
+}
+
+template<>
+void myVector<std::string>::enlarge(unsigned int inc)
+{
+    //creating a new array with the new size
+    std::string * temp = new std::string[sz+inc];
+
+    //setting the new array to the values of the old
+    for(unsigned int i=0; i < sz; i++)
+        temp[i] = p[i]; 
+
+    //initializing all the extra slots to zero
+    for(unsigned int i = sz; i < sz + inc; i++)
+        temp[i] = "";    
+
+    //deleting the old array
+    delete[] p; 
+
+    //setting the pointer to the new array
+    p = temp;   
+
+    //increasing the size by the increase
+    sz += inc;
+
+    //temp will go out of scope here
+    //the array remains and p points to it
+}
+
+template<>
+void myVector<std::string>::sort()
+{
+    std::string strupr(std::string);
+
+    bool switched = true;
+
+    for(unsigned int pass = 0; pass < sz - 1; pass++)
+    {
+        switched = false;
+
+        for(unsigned int j = 0; j < sz - pass - 1; j++)
+            if( strupr( p[j] ) > strupr( p[j+1] ) )
+                this->swap(j, j+1);
+    }
+
+}
+
+
+//Recieves a string
+//Return the uppercase string
+
+std::string strupr(std::string str)
+{
+    for(int i =0; i < str.length(); i++)
+        str[i] = toupper( str[i] );
+
+    return str;
+}
