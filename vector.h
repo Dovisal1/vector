@@ -17,27 +17,19 @@ private:
 
     Type * p;
     unsigned int sz;
-
-
-
-    //Sets all elements to zero
-    void initialize()
-    {
-        for (unsigned int i=0; i < sz; i++)
-            p[i] = 0;   
-    }
-
-
-
+    
     //set all elements to the argument
     void initialize(Type val)
     {
         for (unsigned int i=0; i < sz; i++)
             p[i] = val;   
     }
-
-
-
+    
+    //Sets all elements to zero
+    void initialize()
+    {
+        initialize(0);  
+    }
 
     //hopefully this isn't a memory leak
     void enlarge(unsigned int inc)
@@ -47,7 +39,7 @@ private:
 
         //setting the new array to the values of the old
         for(unsigned int i=0; i < sz; i++)
-            temp[i] = p[i]; 
+            temp[i] = p[i];
 
         //initializing all the extra slots to zero
         for(unsigned int i = sz; i < sz + inc; i++)
